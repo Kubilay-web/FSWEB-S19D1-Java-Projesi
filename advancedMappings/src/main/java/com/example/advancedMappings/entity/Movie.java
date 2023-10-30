@@ -20,7 +20,7 @@ public class Movie {
     private String directorName;
     @Column(name = "rating")
     private double rating;
-    @Column(name = "release_Date")
+    @Column(name = "releaseDate")
     private String releaseDate;
 
     @ManyToMany

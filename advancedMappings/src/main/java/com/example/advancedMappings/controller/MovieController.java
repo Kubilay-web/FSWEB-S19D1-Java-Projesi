@@ -31,6 +31,20 @@ public class MovieController {
         return movieService.saveMovie(movie);
     }
 
+    @PutMapping("/{id}")
+    public Movie updateMovie(@PathVariable Long id, @RequestBody Movie newMovieData) {
+        Movie existingMovie = movieService.getMovieById(id);
+        if (existingMovie != null) {
+            existingMovie.setName(newMovieData.getName());
+            existingMovie.setDirectorName(newMovieData.getDirectorName());
+            existingMovie.setRating(newMovieData.getRating());
+            existingMovie.setReleaseDate(newMovieData.getReleaseDate());
+            return movieService.saveMovie(existingMovie);
+        } else {
+            return null;
+        }
+    }
+
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);

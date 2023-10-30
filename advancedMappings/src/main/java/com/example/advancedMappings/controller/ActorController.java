@@ -33,6 +33,21 @@ public class ActorController {
     }
 
 
+    @PutMapping("/{id}")
+    public Actor updateActor(@PathVariable Long id, @RequestBody Actor newActorData) {
+        Actor existingActor = actorService.getActorById(id);
+        if (existingActor != null) {
+            existingActor.setFirstName(newActorData.getFirstName());
+            existingActor.setLastName(newActorData.getLastName());
+            existingActor.setGender(newActorData.getGender());
+            existingActor.setBirthDate(newActorData.getBirthDate());
+            return actorService.saveActor(existingActor);
+        } else {
+            return null;
+        }
+    }
+
+
     @DeleteMapping("/{id}")
     public void deleteActor(@PathVariable Long id) {
         actorService.deleteActor(id);
